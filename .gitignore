@@ -39,6 +39,9 @@ yarn-error.log*
 # claude code local settings
 /.claude
 
+# planning docs (keep locally, don't track)
+docs/*.docx
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

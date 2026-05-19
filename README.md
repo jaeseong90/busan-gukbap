@@ -2,8 +2,7 @@
 
 > 부산에서 '오늘 국밥 어디 가지?' 고민을 10초 만에 끝내주는 위치 기반 국밥 추천 웹앱.
 
-**Live**: https://busan-gukbap.vercel.app (배포 후 갱신)
-**기획서**: [`docs/busan-gukbap-기획서-v1.0.docx`](docs/busan-gukbap-기획서-v1.0.docx)
+**Live**: https://busan-gukbap.vercel.app
 
 ## 핵심 가치
 
@@ -56,9 +55,7 @@ src/
   lib/                    # 유틸 (distance, hours, supabase)
 supabase/
   migrations/0001_init.sql # PostGIS + shops/reviews + RPC + RLS
-  seed.sql                # 15곳 시드 INSERT
-docs/
-  busan-gukbap-기획서-v1.0.docx
+  seed.sql                # 30곳 시드 INSERT
 ```
 
 ## 로드맵
@@ -67,8 +64,6 @@ docs/
 - **Phase 1** — Supabase 연동, 검색 SSR, 맛집 50곳+
 - **Phase 2** — 소셜 로그인, 리뷰/별점, 공유 OG 이미지, 맛집 제보
 - **Phase 3** — SEO 최적화, PWA
-
-자세한 내용은 기획서 참고.
 
 ## 데이터 출처
 

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#D85A30"/>
+  <!-- 김 (steam) -->
+  <g stroke="#FBF7F2" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M22 14 q-4 5 0 9 q4 5 0 9"/>
+    <path d="M32 11 q-4 5 0 9 q4 5 0 9"/>
+    <path d="M42 14 q-4 5 0 9 q4 5 0 9"/>
+  </g>
+  <!-- 그릇 -->
+  <path d="M10 36 L54 36 Q54 55, 42 57 L22 57 Q10 55, 10 36 Z" fill="#FBF7F2"/>
+  <!-- 국물 -->
+  <ellipse cx="32" cy="38.5" rx="20" ry="3" fill="#F4E6C8"/>
+  <!-- 받침 라인 -->
+  <rect x="6" y="33" width="52" height="3.5" rx="1.7" fill="#B34721"/>
+</svg>
