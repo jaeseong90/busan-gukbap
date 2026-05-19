@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { NearbyShops } from "@/components/NearbyShops";
 import { RandomPick } from "@/components/RandomPick";
+import ShopMapClient from "@/components/ShopMapClient";
 import { SEED_SHOPS, GU_LIST } from "@/data/shops";
 
 export default function HomePage() {
@@ -58,17 +59,50 @@ export default function HomePage() {
       </section>
 
       <NearbyShops />
+
+      {/* 부산 전체 지도 */}
+      <section className="mt-12">
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <h2 className="font-display text-2xl text-ink">
+              부산 국밥 지도 🗺️
+            </h2>
+            <p className="mt-1 text-sm text-ink/60">
+              전체 {SEED_SHOPS.length}곳의 위치. 마커를 눌러 바로 이동하세요.
+            </p>
+          </div>
+          <Link
+            href="/list"
+            className="hidden text-sm font-medium text-orange hover:text-orange-deep sm:inline"
+          >
+            전체 목록 →
+          </Link>
+        </div>
+        <div className="mt-4">
+          <ShopMapClient shops={SEED_SHOPS} height="460px" numbered />
+        </div>
+        <p className="mt-2 text-xs text-ink/40">
+          지도: © OpenStreetMap contributors
+        </p>
+      </section>
+
       <RandomPick />
 
       <section className="mt-12 rounded-2xl border border-dashed border-black/10 bg-white/60 p-5 text-sm text-ink/60">
         <p className="font-medium text-ink/80">서비스 안내</p>
         <ul className="mt-2 list-inside list-disc space-y-1">
           <li>
-            현재 v1.0 — 초기 시드 데이터 {SEED_SHOPS.length}곳. Phase 1 동안
-            30곳+으로 확장 예정.
+            현재 v1.0 — 부산 16개 구·군 {SEED_SHOPS.length}곳 등록. 다이닝코드·
+            식신·부산일보 돼지국밥로드 등 공개 정보 교차 확인.
           </li>
-          <li>맛집 정보가 부정확하다면 제보 부탁드립니다 (Phase 2 예정).</li>
-          <li>광고 없음. 부산 현지인이 직접 검증한 곳만 등록.</li>
+          <li>
+            별점/리뷰는 Phase 2 도입 전까지 플레이스홀더입니다. 실제 리뷰는
+            소셜 로그인 후 직접 작성하실 수 있어요.
+          </li>
+          <li>
+            정보 오류 제보 / 새 맛집 등록 요청은 Phase 2에서 받습니다. 광고
+            없음.
+          </li>
         </ul>
       </section>
     </div>

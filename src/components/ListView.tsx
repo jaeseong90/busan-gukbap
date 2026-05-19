@@ -4,14 +4,17 @@ import { useMemo, useState } from "react";
 import type { Shop, ShopWithDistance } from "@/lib/types";
 import { GU_LIST, TAG_LIST } from "@/data/shops";
 import { ShopCard } from "./ShopCard";
+import ShopMapClient from "./ShopMapClient";
 
 type Sort = "name" | "rating" | "price";
+type View = "card" | "map";
 
 export function ListView({ shops }: { shops: Shop[] }) {
   const [q, setQ] = useState("");
   const [gu, setGu] = useState<string>("전체");
   const [tag, setTag] = useState<string>("전체");
   const [sort, setSort] = useState<Sort>("rating");
+  const [view, setView] = useState<View>("card");
 
   const filtered = useMemo<ShopWithDistance[]>(() => {
     const lq = q.trim().toLowerCase();
@@ -85,7 +88,25 @@ export function ListView({ shops }: { shops: Shop[] }) {
               <option value="name">이름순</option>
             </select>
           </label>
-          <span className="ml-auto text-ink/60">{filtered.length}곳</span>
+          <div className="ml-auto flex items-center gap-3 text-ink/60">
+            <span>{filtered.length}곳</span>
+            <div className="inline-flex overflow-hidden rounded-full border border-black/10 bg-white text-xs">
+              <button
+                type="button"
+                onClick={() => setView("card")}
+                className={`px-3 py-1.5 font-medium ${view === "card" ? "bg-orange text-white" : "text-ink/70 hover:bg-orange/5"}`}
+              >
+                카드
+              </button>
+              <button
+                type="button"
+                onClick={() => setView("map")}
+                className={`px-3 py-1.5 font-medium ${view === "map" ? "bg-orange text-white" : "text-ink/70 hover:bg-orange/5"}`}
+              >
+                🗺️ 지도
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -93,6 +114,13 @@ export function ListView({ shops }: { shops: Shop[] }) {
         <p className="mt-8 rounded-2xl border border-dashed border-black/10 bg-white/50 p-8 text-center text-sm text-ink/60">
           조건에 맞는 맛집이 없어요. 필터를 풀어보세요.
         </p>
+      ) : view === "map" ? (
+        <div className="mt-6">
+          <ShopMapClient shops={filtered} height="540px" numbered />
+          <p className="mt-2 text-xs text-ink/40">
+            지도: © OpenStreetMap contributors
+          </p>
+        </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((s) => (

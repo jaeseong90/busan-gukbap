@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SEED_SHOPS, GU_LIST } from "@/data/shops";
 import { ShopCard } from "@/components/ShopCard";
+import ShopMapClient from "@/components/ShopMapClient";
 import type { ShopWithDistance } from "@/lib/types";
 
 interface PageProps {
@@ -69,11 +70,19 @@ export default async function GuPage({ params }: PageProps) {
           아직 등록된 맛집이 없어요. 곧 추가됩니다!
         </p>
       ) : (
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {shops.map((s) => (
-            <ShopCard key={s.id} shop={s} />
-          ))}
-        </div>
+        <>
+          <div className="mt-6">
+            <ShopMapClient shops={shops} height="380px" numbered />
+            <p className="mt-2 text-xs text-ink/40">
+              지도: © OpenStreetMap contributors
+            </p>
+          </div>
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {shops.map((s) => (
+              <ShopCard key={s.id} shop={s} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

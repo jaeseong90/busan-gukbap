@@ -5,6 +5,7 @@ import { Rating } from "@/components/Rating";
 import { TagBadge } from "@/components/TagBadge";
 import { formatHoursLine, todayLine, isOpenNow } from "@/lib/hours";
 import { ShareButton } from "@/components/ShareButton";
+import ShopMapClient from "@/components/ShopMapClient";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -127,6 +128,16 @@ export default async function ShopPage({ params }: PageProps) {
             <ShareButton title={shop.name} text={shop.description} />
           </div>
         </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="font-display text-lg text-ink">🗺️ 위치 지도</h2>
+        <div className="mt-3">
+          <ShopMapClient shops={[shop]} height="360px" zoom={16} />
+        </div>
+        <p className="mt-2 text-xs text-ink/40">
+          지도: © OpenStreetMap contributors
+        </p>
       </section>
 
       <section className="mt-8 rounded-2xl border border-dashed border-black/10 bg-white/50 p-5 text-sm text-ink/60">
