@@ -35,9 +35,13 @@ export default async function ShopPage({ params }: PageProps) {
   if (!shop) notFound();
 
   const open = isOpenNow(shop.hours);
-  const mapHref = `https://map.kakao.com/?q=${encodeURIComponent(
-    `${shop.name} ${shop.address}`,
-  )}`;
+  const [lng, lat] = shop.location;
+  const encodedName = encodeURIComponent(shop.name);
+  // 카카오맵: 좌표 기반 핀 (검색은 가게명+주소 합치면 매칭 안 됨)
+  const kakaoMapHref = `https://map.kakao.com/link/map/${encodedName},${lat},${lng}`;
+  const kakaoToHref = `https://map.kakao.com/link/to/${encodedName},${lat},${lng}`;
+  // 네이버지도 웹 — 좌표 기반 검색 결과
+  const naverMapHref = `https://map.naver.com/p?c=${lng},${lat},17,0,0,0,dh&searchText=${encodedName}`;
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-10">
@@ -116,14 +120,30 @@ export default async function ShopPage({ params }: PageProps) {
           <p className="mt-2 text-xs leading-relaxed text-ink/60">
             {formatHoursLine(shop.hours)}
           </p>
-          <div className="mt-4 flex gap-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             <a
-              href={mapHref}
+              href={kakaoToHref}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 rounded-full bg-orange px-4 py-2 text-sm font-semibold text-white hover:bg-orange-deep"
             >
-              카카오맵으로 보기 →
+              🚶 길찾기
+            </a>
+            <a
+              href={kakaoMapHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-full border border-orange/40 px-4 py-2 text-sm font-semibold text-orange hover:bg-orange/10"
+            >
+              카카오맵
+            </a>
+            <a
+              href={naverMapHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 rounded-full border border-black/10 px-4 py-2 text-sm font-semibold text-ink/70 hover:bg-ink/5"
+            >
+              네이버지도
             </a>
             <ShareButton title={shop.name} text={shop.description} />
           </div>
