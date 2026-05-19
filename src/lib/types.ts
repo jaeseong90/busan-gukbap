@@ -48,6 +48,8 @@ export interface Shop {
   location: [number, number];
   description: string;
   tags: Tag[];
+  /** 방송 출연·창업 연도·노포 인증 등 시각적 강조 배지 (최대 2개 권장) */
+  badges?: string[];
   price_min: number;
   hours: Hours;
   phone: string | null;

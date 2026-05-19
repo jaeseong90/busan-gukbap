@@ -5,6 +5,8 @@ import { Rating } from "@/components/Rating";
 import { TagBadge } from "@/components/TagBadge";
 import { formatHoursLine, todayLine, isOpenNow } from "@/lib/hours";
 import { ShareButton } from "@/components/ShareButton";
+import { Badge } from "@/components/Badge";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import ShopMapClient from "@/components/ShopMapClient";
 
 interface PageProps {
@@ -72,9 +74,19 @@ export default async function ShopPage({ params }: PageProps) {
             {open ? "● 지금 영업중" : "● 준비중"}
           </span>
         </div>
-        <h1 className="mt-3 font-display text-4xl text-ink sm:text-5xl">
-          {shop.name}
-        </h1>
+        {shop.badges && shop.badges.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {shop.badges.map((b) => (
+              <Badge key={b}>{b}</Badge>
+            ))}
+          </div>
+        )}
+        <div className="mt-3 flex items-start justify-between gap-4">
+          <h1 className="font-display text-4xl text-ink sm:text-5xl">
+            {shop.name}
+          </h1>
+          <FavoriteButton shopId={shop.id} />
+        </div>
         <div className="mt-3 flex flex-wrap items-center gap-4">
           <Rating value={shop.avg_rating} count={shop.review_count} size="lg" />
           <span className="text-ink/70">

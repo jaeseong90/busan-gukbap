@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Black_Han_Sans, Noto_Sans_KR } from "next/font/google";
 import Link from "next/link";
+import { FavoritesNav } from "@/components/FavoritesNav";
 import "./globals.css";
 
 const blackHanSans = Black_Han_Sans({
@@ -60,12 +61,7 @@ export default function RootLayout({
               >
                 구별
               </Link>
-              <Link
-                href="/random"
-                className="rounded-full px-3 py-1.5 hover:bg-orange/10 hover:text-orange"
-              >
-                뽑기
-              </Link>
+              <FavoritesNav />
             </nav>
           </div>
         </header>

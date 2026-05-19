@@ -1,4 +1,5 @@
 import type { Shop } from "@/lib/types";
+import { SHOP_BADGES } from "./badges";
 
 /**
  * 부산 돼지국밥 맛집 시드 데이터 (30곳).
@@ -10,8 +11,9 @@ import type { Shop } from "@/lib/types";
  * - 가격은 2024-2025년 일반적 가격대
  * - 영업시간: 24시간/정기 휴무는 검증된 곳만 표기, 그 외 일반적 영업시간
  * - avg_rating/review_count는 Phase 2 리뷰 시스템 도입 전까지의 플레이스홀더
+ * - badges는 src/data/badges.ts 에서 머지
  */
-export const SEED_SHOPS: Shop[] = [
+const RAW_SHOPS: Shop[] = [
   {
     id: "shop-001",
     name: "합천일류돼지국밥",
@@ -635,6 +637,11 @@ export const SEED_SHOPS: Shop[] = [
     review_count: 234,
   },
 ];
+
+export const SEED_SHOPS: Shop[] = RAW_SHOPS.map((s) => ({
+  ...s,
+  badges: SHOP_BADGES[s.id] ?? [],
+}));
 
 export const GU_LIST = Array.from(
   new Set(SEED_SHOPS.map((s) => s.gu)),
